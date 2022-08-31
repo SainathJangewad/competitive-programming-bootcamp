@@ -15,29 +15,26 @@ typedef long long ll;
 #define co(x) cout << x << "\n"
 #define all(x) (x).begin(), (x).end()
 #define mod 1000000007
+#define forn(i, n) for (int i = 0; i < int(n); i++)
 
 void solve()
 {
-    int n, tar;
-    cin >> n >> tar;
-    vi coins(n);
-    for (int i = 0; i < n; i++)
+    int n;
+    cin >> n;
+    vi arr(n);
+    forn(i, n)
     {
-        cin >> coins[i];
+        cin >> arr[i];
     }
-    vi dp(tar + 1, tar + 1);
-    dp[0] = 0;
-    for (int i = 1; i <= tar; i++)
+    int count = 1;
+    sort(arr.begin(), arr.end());
+    int secondLastIndex = n - 1;
+    forn(i, secondLastIndex)
     {
-        for (int j = 0; j < coins.size(); j++)
-        {
-            if (i - coins[j] >= 0)
-            {
-                dp[i] = min(dp[i - coins[j]] + 1, dp[i]) % mod;
-            }
-        }
+        if (arr[i] != arr[i + 1])
+            count++;
     }
-    cout << (dp[tar] > tar ? -1 : dp[tar]);
+    cout << count << nl;
 }
 
 int main()
