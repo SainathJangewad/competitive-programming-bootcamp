@@ -15,57 +15,56 @@ typedef long long ll;
 #define co(x) cout << x << "\n"
 #define all(x) (x).begin(), (x).end()
 #define mod 1000000007
-#define forn(i, n) for (int i = 0; i < int(n); i++) 
+#define forn(i, n) for (int i = 0; i < int(n); i++)
+// round up trick : int times = (N + X - 1) / X;
+
+int findCount(char ch, int x, int y)
+{
+
+    int count = 0;
+    forn(i, 2)
+    {
+        forn(j, 2)
+        {
+            if (i != x && j != y && arr[i][j] == ch)
+            {
+                count++;
+            }
+        }
+    }
+
+    return count;
+}
 
 void solve()
 {
-    int n;
-    cin >> n;
-    string arr[3][n];
-    map<string,int> m;
-    for(int i = 0; i < 3; i++)
+    int arr[2][2];
+    forn(i, 2)
+    {
+        forn(j, 2)
+        {
+            cin >> arr[i][j];
+        }
+    }
+    int count = 0;
+    forn(i, 2)
     {
         forn(j, n)
         {
-            cin >> arr[i][j]; 
-            m[arr[i][j]]++;
+            findCount(arr[i][j], i, n);
         }
     }
-    
-    int countOne = 3 * n;
-    int counttwo = countOne;
-    int countThree = countOne;
-    forn(i,n){
-        if(m[arr[0][i]] == 3){
-            countOne -= 3;
-        }else if(m[arr[0][i]] == 2) countOne -= 2;
-    }
-     forn(i,n){
-        if(m[arr[1][i]] == 3){
-            counttwo -= 3;
-        }else if(m[arr[1][i]] == 2) counttwo -= 2;
-    }
-     forn(i,n){
-        if(m[arr[2][i]] == 3){
-            countThree -= 3;
-        }else if(m[arr[2][i]] == 2) countThree-= 2;
-    }
-    
-    cout << countOne << " " << counttwo <<" " << countThree << nl;
- 
-  
-  
- 
-    
 }
 
 int main()
 {
+
     int t;
     cin >> t;
     while (t--)
     {
         solve();
     }
+
     return 0;
 }
