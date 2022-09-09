@@ -18,41 +18,47 @@ typedef long long ll;
 #define forn(i, n) for (int i = 0; i < int(n); i++)
 // round up trick : int times = (N + X - 1) / X;
 
-int findCount(char ch, int x, int y)
+void solve()
 {
-
+    string s;
+    cin >> s;
+    vi ans;
     int count = 0;
-    forn(i, 2)
+    int sum = 0;
+    forn(i, s.size())
     {
-        forn(j, 2)
+
+        if (s[i + 1] == '1')
         {
-            if (i != x && j != y && arr[i][j] == ch)
+            count++;
+        }
+        else
+        {
+
+            if (count)
             {
-                count++;
+                ans.pb(count);
+                count = 0;
             }
         }
     }
-
-    return count;
-}
-
-void solve()
-{
-    int arr[2][2];
-    forn(i, 2)
+    sort(ans.rbegin(), ans.rend());
+    for (int i = 0; i < ans.size(); i += 2)
     {
-        forn(j, 2)
-        {
-            cin >> arr[i][j];
-        }
+        sum += ans[i];
     }
-    int count = 0;
-    forn(i, 2)
+
+    if (s[0] == '1' && s[1] == '1')
     {
-        forn(j, n)
-        {
-            findCount(arr[i][j], i, n);
-        }
+        cout << sum + 1 << nl;
+    }
+    else if (sum == 0)
+    {
+        cout << 0 << nl;
+    }
+    else
+    {
+        cout << sum << nl;
     }
 }
 
